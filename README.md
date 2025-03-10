@@ -63,13 +63,13 @@ import commendations
 
 ## Доступные скрипты и функции
 
-### ** Исправление оценок – `fix_marks.py`**
+### **Исправление оценок – `fix_marks.py`**
 - `fix_marks(schoolkid)`: Исправляет все **двойки** и **тройки** ученика, заменяя их на **пятёрки**.
 
-### ** Удаление замечаний – `fix_chastisements.py`**
+### **Удаление замечаний – `fix_chastisements.py`**
 - `remove_chastisements(schoolkid)`: Удаляет **все замечания** у ученика.
 
-### ** Добавление похвалы – `commendations.py`**
+### **Добавление похвалы – `commendations.py`**
 - `create_commendation(schoolkid_name, subject_title)`:  
   Добавляет **похвалу** на последний урок по указанному предмету.
 
