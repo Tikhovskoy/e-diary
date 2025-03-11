@@ -1,14 +1,10 @@
 from datacenter.models import Schoolkid, Chastisement
 
 def remove_chastisements(schoolkid):
-
     chastisements = Chastisement.objects.filter(schoolkid=schoolkid)
-    count = chastisements.count()
+    deleted_count, _ = chastisements.delete()
 
-    if count == 0:
+    if deleted_count:
+        print(f"Удалено {deleted_count} замечаний у {schoolkid.full_name}!")
+    else:
         print(f"У {schoolkid.full_name} нет замечаний!")
-        return
-
-    chastisements.delete()
-    print(f"Удалено {count} замечаний у {schoolkid.full_name}!")
-
