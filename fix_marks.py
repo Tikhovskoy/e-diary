@@ -1,5 +1,6 @@
 from datacenter.models import Mark
-from commendations import get_schoolkid
+from commendations import get_schoolkid, StudentNotFoundError, MultipleStudentsError, LessonNotFoundError
+from django.db.utils import DatabaseError
 
 def fix_marks(schoolkid_name):
     try:
@@ -12,5 +13,7 @@ def fix_marks(schoolkid_name):
         else:
             print("Нет плохих оценок для исправления!")
 
-    except Exception as e:
-        print(f"Ошибка: {e}")
+    except (StudentNotFoundError, MultipleStudentsError, LessonNotFoundError) as e:
+        print(e)
+    except DatabaseError as e:
+        print(f"Ошибка базы данных: {e}")
