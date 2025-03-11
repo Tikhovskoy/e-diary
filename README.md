@@ -23,16 +23,11 @@ source venv/bin/activate
 ```sh
 python run_shell.py
 ```
-Должно появиться сообщение:
-```
-Django загружен, можно использовать скрипты.
-```
+После этого можно **импортировать скрипты**.
 
-### **Импортируйте скрипты**
+### **Импортируйте `db_tools.py`**
 ```python
-import fix_marks
-import fix_chastisements
-import commendations
+import db_tools
 ```
 
 ### **Используйте нужные функции**  
@@ -40,36 +35,39 @@ import commendations
 
 - **Находим ученика**
   ```python
-  from datacenter.models import Schoolkid
-  kid = Schoolkid.objects.get(full_name__contains="Фролов Иван")
+  kid = db_tools.get_schoolkid("Фролов Иван")
   ```
 
 - **Исправляем оценки**
   ```python
-  fix_marks.fix_marks(kid)
+  db_tools.fix_marks("Фролов Иван")
   ```
 
 - **Удаляем замечания**
   ```python
-  fix_chastisements.remove_chastisements(kid)
+  db_tools.remove_chastisements("Фролов Иван")
   ```
 
 - **Добавляем похвалу по математике**
   ```python
-  commendations.create_commendation("Фролов Иван", "Математика")
+  db_tools.create_commendation("Фролов Иван", "Математика")
   ```
 
 ---
 
-## Доступные скрипты и функции
+## Доступные функции в `db_tools.py`
 
-### **Исправление оценок – `fix_marks.py`**
-- `fix_marks(schoolkid)`: Исправляет все **двойки** и **тройки** ученика, заменяя их на **пятёрки**.
+### **Исправление оценок**
+- `fix_marks(schoolkid_name)`: Исправляет все **двойки** и **тройки** ученика, заменяя их на **пятёрки**.
 
-### **Удаление замечаний – `fix_chastisements.py`**
-- `remove_chastisements(schoolkid)`: Удаляет **все замечания** у ученика.
+### **Удаление замечаний**
+- `remove_chastisements(schoolkid_name)`: Удаляет **все замечания** у ученика.
 
-### **Добавление похвалы – `commendations.py`**
+### **Добавление похвалы**
 - `create_commendation(schoolkid_name, subject_title)`:  
   Добавляет **похвалу** на последний урок по указанному предмету.
+
+### **Поиск ученика**
+- `get_schoolkid(schoolkid_name)`:  
+  Возвращает **объект ученика**, если найден.
 
